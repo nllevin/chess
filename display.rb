@@ -15,7 +15,9 @@ class Display
             print "#{8 - row_idx} "
             row.each_with_index do |tile, col_idx|
                 tile_str = (tile.nil? ? " " : "P")
-                if (row_idx + col_idx).even?
+                if @cursor.cursor_pos == [row_idx, col_idx]
+                    print tile_str.on_light_blue
+                elsif (row_idx + col_idx).even?
                     print tile_str.black.on_white
                 else
                     print tile_str.on_black
