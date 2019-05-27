@@ -30,6 +30,11 @@ class Board
         row, col = pos
         @grid[row][col] = piece
     end
+
+    def valid_pos?(pos)
+        row, col = pos
+        row.between?(0,7) && col.between?(0,7)
+    end
 end
 
 class NoPieceError < StandardError
