@@ -27,4 +27,11 @@ class Display
         end
         puts "  #{("a".."h").to_a.join("")}"
     end
+
+    def test_play
+        while true
+            @cursor.get_input
+            self.render
+        end
+    end
 end
