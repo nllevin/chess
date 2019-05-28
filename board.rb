@@ -1,9 +1,11 @@
 require_relative "piece"
 
 class Board
+    attr_reader :rows
+
     def initialize
-        @grid = Array.new(8) { [] }
-        @grid.each_with_index do |row, row_idx|
+        @rows = Array.new(8) { [] }
+        @rows.each_with_index do |row, row_idx|
             if [0,1,6,7].include?(row_idx)
                 8.times { row << Piece.new }
             else
@@ -31,10 +33,6 @@ class Board
     def []=(pos, piece)
         row, col = pos
         @grid[row][col] = piece
-    end
-
-    def rows
-        @grid
     end
 
     def valid_pos?(pos)
