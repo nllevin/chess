@@ -3,9 +3,9 @@ require_relative "board"
 class Piece
     
 
-    def initialize(pos, color, board)
-        @pos, @color, @board =
-            pos, color, board
+    def initialize(color, board, pos)
+        @color, @board, @pos =
+            color, board, pos
     end
 
     def moves
