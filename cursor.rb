@@ -46,6 +46,10 @@ class Cursor
     handle_key(key)
   end
 
+  def toggle_selected
+    @selected = !@selected
+  end
+
   private
 
   def read_char
@@ -95,9 +99,5 @@ class Cursor
     d_row, d_col = diff
     new_pos = [row + d_row, col + d_col]
     @cursor_pos = new_pos if @board.valid_pos?(new_pos)
-  end
-
-  def toggle_selected
-    @selected = !@selected
   end
 end
