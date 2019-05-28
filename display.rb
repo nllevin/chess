@@ -4,6 +4,8 @@ require_relative "board"
 require_relative "cursor"
 
 class Display
+    attr_reader :cursor
+    
     def initialize(board)
         @board = board
         @cursor = Cursor.new([0,0], board)
@@ -31,11 +33,12 @@ class Display
         end
         puts "  #{("a".."h").to_a.join("")}"
     end
+end
 
-    def test_play
-        while true
-            self.render
-            @cursor.get_input
-        end
+if __FILE__ == $PROGRAM_NAME
+    test_display = Display.new(Board.new)
+    while true
+        test_display.render
+        test_display.cursor.get_input
     end
 end
