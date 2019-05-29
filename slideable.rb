@@ -37,4 +37,21 @@ module Slideable
         end
         horizontal_moves
     end
+
+    def diagonal_dirs
+        diagonal_moves = []
+        DIAGONAL_DIRS.each do |diagonal_dir|
+            case diagonal_dir
+            when :northeast
+                diagonal_moves += grow_unblocked_moves_in_dir(1,1)
+            when :southeast
+                diagonal_moves += grow_unblocked_moves_in_dir(1,-1)
+            when :southwest
+                diagonal_moves += grow_unblocked_moves_in_dir(-1,-1)
+            when :northwest
+                diagonal_moves += grow_unblocked_moves_in_dir(-1,-1)
+            end
+        end
+        diagonal_moves
+    end
 end
