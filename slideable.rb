@@ -54,4 +54,35 @@ module Slideable
         end
         diagonal_moves
     end
+
+    private
+
+    def move_dirs
+        #overwritten by subclass
+    end
+
+    def grow_unblocked_moves_in_dir(dx,dy)
+        unblocked_moves = []
+        potential_move = [@pos[0] + dx, @pos[1] + dy]
+        
+        while @board.valid_pos?(potential_move)
+            occupant = @board[potential_move]
+
+            unless occupant.symbol == :null
+                if occupant.color == self.color
+                    break
+                else
+                    unblocked_moves << potential_move
+                    break
+                end
+            end
+
+            unblocked_moves << potential_move
+
+            potential_move[0] += dx
+            potential_move[1] += dy
+        end
+
+        unblocked_moves
+    end
 end
