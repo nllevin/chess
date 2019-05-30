@@ -1,3 +1,5 @@
+require "byebug"
+
 module Slideable
     HORIZONTAL_DIRS = [
         :north,
@@ -14,8 +16,9 @@ module Slideable
     ]
 
     def moves
+        #debugger
         moves_arr = []
-        dirs = self.move_dirs
+        dirs = self.mov_dirs
         moves_arr += self.horizontal_dirs if dirs.include?(:horizontal)
         moves_arr += self.diagonal_dirs if dirs.include?(:diagonal)
         moves_arr
@@ -26,13 +29,13 @@ module Slideable
         HORIZONTAL_DIRS.each do |horizontal_dir|
             case horizontal_dir
             when :north
-                horizontal_moves += grow_unblocked_moves_in_dir(0,1)
-            when :south
-                horizontal_moves += grow_unblocked_moves_in_dir(0,-1)
-            when :west
                 horizontal_moves += grow_unblocked_moves_in_dir(-1,0)
-            when :east
+            when :south
                 horizontal_moves += grow_unblocked_moves_in_dir(1,0)
+            when :west
+                horizontal_moves += grow_unblocked_moves_in_dir(0,-1)
+            when :east
+                horizontal_moves += grow_unblocked_moves_in_dir(0,1)
             end
         end
         horizontal_moves
@@ -43,11 +46,11 @@ module Slideable
         DIAGONAL_DIRS.each do |diagonal_dir|
             case diagonal_dir
             when :northeast
-                diagonal_moves += grow_unblocked_moves_in_dir(1,1)
+                diagonal_moves += grow_unblocked_moves_in_dir(-1,1)
             when :southeast
-                diagonal_moves += grow_unblocked_moves_in_dir(1,-1)
+                diagonal_moves += grow_unblocked_moves_in_dir(1,1)
             when :southwest
-                diagonal_moves += grow_unblocked_moves_in_dir(-1,-1)
+                diagonal_moves += grow_unblocked_moves_in_dir(1,-1)
             when :northwest
                 diagonal_moves += grow_unblocked_moves_in_dir(-1,-1)
             end
@@ -68,7 +71,7 @@ module Slideable
         while @board.valid_pos?(potential_move)
             occupant = @board[potential_move]
 
-            unless occupant.symbol == :null
+            if !occupant.nil?         #.symbol == :null
                 if occupant.color == self.color
                     break
                 else
@@ -77,7 +80,7 @@ module Slideable
                 end
             end
 
-            unblocked_moves << potential_move
+            unblocked_moves << [potential_move[0], potential_move[1]]
 
             potential_move[0] += dx
             potential_move[1] += dy

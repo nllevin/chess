@@ -7,9 +7,9 @@ class Board
         @rows = Array.new(8) { [] }
         @rows.each_with_index do |row, row_idx|
             if [0,1,6,7].include?(row_idx)
-                8.times { row << Piece.new }
+                #8.times { row << Piece.new }
             else
-                8.times { row << nil }
+                #8.times { row << nil }
             end
         end
     end
@@ -27,12 +27,12 @@ class Board
 
     def [](pos)
         row, col = pos
-        @grid[row][col]
+        @rows[row][col]
     end
 
     def []=(pos, piece)
         row, col = pos
-        @grid[row][col] = piece
+        @rows[row][col] = piece
     end
 
     def valid_pos?(pos)
