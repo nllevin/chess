@@ -73,10 +73,10 @@ module Slideable
 
             if !occupant.nil?         #.symbol == :null
                 if occupant.color == self.color
-                    break
+                    return unblocked_moves
                 else
                     unblocked_moves << potential_move
-                    break
+                    return unblocked_moves
                 end
             end
 
