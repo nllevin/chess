@@ -18,7 +18,7 @@ module Slideable
     def moves
         #debugger
         moves_arr = []
-        dirs = self.mov_dirs
+        dirs = self.move_dirs
         moves_arr += self.horizontal_dirs if dirs.include?(:horizontal)
         moves_arr += self.diagonal_dirs if dirs.include?(:diagonal)
         moves_arr

@@ -10,7 +10,7 @@ class Queen < Piece
 
     protected
 
-    def mov_dirs
+    def move_dirs
         [:horizontal, :diagonal]
     end
 end

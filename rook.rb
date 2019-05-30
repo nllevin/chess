@@ -10,7 +10,7 @@ class Rook < Piece
 
     protected
 
-    def mov_dirs
+    def move_dirs
         [:horizontal]
     end
 end
