@@ -1,4 +1,10 @@
-require_relative "piece"
+require_relative "rook"
+require_relative "knight"
+require_relative "bishop"
+require_relative "queen"
+require_relative "king"
+require_relative "pawn"
+require_relative "null_piece"
 
 class Board
     attr_reader :rows
@@ -6,10 +12,32 @@ class Board
     def initialize
         @rows = Array.new(8) { [] }
         @rows.each_with_index do |row, row_idx|
-            if [0,1,6,7].include?(row_idx)
-                #8.times { row << Piece.new }
+            case row_idx
+            when 0, 7
+                color = (row_idx == 0 ? :black : :white)
+                (0..7).each do |col_idx|
+                    piece_info = [color, self, [row_idx, col_idx]]
+                    case col_idx
+                    when 0, 7
+                        row << Rook.new(*piece_info)
+                    when 1, 6
+                        row << Knight.new(*piece_info)
+                    when 2, 5
+                        row << Bishop.new(*piece_info)
+                    when 3
+                        row << Queen.new(*piece_info)
+                    when 4
+                        row << King.new(*piece_info)
+                    end
+                end
+            when 1, 6
+                color = (row_idx == 1 ? :black : :white)
+                (0..7).each do |col_idx|
+                    piece_info = [color, self, [row_idx, col_idx]]
+                    row << Pawn.new(*piece_info)
+                end
             else
-                #8.times { row << nil }
+                8.times { row << NullPiece.instance }
             end
         end
     end
