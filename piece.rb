@@ -2,7 +2,8 @@ require_relative "board"
 require "colorize"
 
 class Piece
-    attr_reader :pos, :color
+    attr_reader :color
+    attr_accessor :pos
 
     def initialize(color, board, pos)
         @color, @board, @pos =
@@ -37,11 +38,15 @@ class Piece
         str
     end
 
+    def empty?
+        symbol == :null_piece
+    end
+
     def moves
         #overwritten by subclasses
     end
 
-    def valid_move?(end_pos)
-        true
+    def symbol
+        #overwritten by subclasses
     end
 end
