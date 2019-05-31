@@ -15,18 +15,18 @@ class Display
         system("clear")
         @board.rows.each_with_index do |row, row_idx|
             print "#{8 - row_idx} "
-            row.each_with_index do |tile, col_idx|
-                tile_str = (tile.nil? ? " " : "P")
+            row.each_with_index do |piece, col_idx|
+                piece_str = piece.to_s
                 if @cursor.cursor_pos == [row_idx, col_idx]
                     if @cursor.selected
-                        print tile_str.on_light_red
+                        print piece_str.on_light_green
                     else
-                        print tile_str.on_light_blue
+                        print piece_str.on_light_blue
                     end
                 elsif (row_idx + col_idx).even?
-                    print tile_str.black.on_white
+                    print piece_str.on_red
                 else
-                    print tile_str.on_black
+                    print piece_str.on_light_black
                 end
             end
             puts
