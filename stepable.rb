@@ -6,7 +6,7 @@ module Stepable
             potential_move = [@pos[0] + dx, @pos[1] + dy]
             if @board.valid_pos?(potential_move)
                 occupant = @board[potential_move]
-                if occupant.nil? || occupant.color != self.color
+                if occupant.empty? || occupant.color != self.color
                     moves_arr << [potential_move[0], potential_move[1]]
                 end
             end

@@ -71,7 +71,7 @@ module Slideable
         while @board.valid_pos?(potential_move)
             occupant = @board[potential_move]
 
-            if !occupant.nil?         #.symbol == :null
+            if !occupant.empty?
                 if occupant.color == self.color
                     return unblocked_moves
                 else
