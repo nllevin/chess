@@ -44,12 +44,12 @@ class Board
 
     def move_piece(start_pos, end_pos)
         piece = self[start_pos]
-        if piece.nil?
+        if piece.empty?
             raise NoPieceError
-        elsif !piece.valid_move?(end_pos)
+        elsif !piece.moves.include?(end_pos)
             raise InvalidMoveError
         else
-            self[start_pos], self[end_pos] = nil, piece
+            self[start_pos], self[end_pos] = NullPiece.instance, piece
         end
     end
 
