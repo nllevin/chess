@@ -7,7 +7,7 @@ class Pawn < Piece
     end
 
     def moves
-        forward_steps #+ side_attacks
+        forward_steps + side_attacks
     end
 
     private
@@ -31,5 +31,11 @@ class Pawn < Piece
             forward_moves << second_step if at_start_row? && @board[second_step].nil? && @board.valid_pos?(second_step) #change to null piece
         end
         forward_moves
+    end
+
+    def side_attacks
+        [[@pos[0] + forward_dir, @pos[1] - 1], [@pos[0] + forward_dir, @pos[1] + 1]].select do |potential_move|
+            @board.valid_pos?(potential_move) && @board[potential_move].color && @board[potential_move].color != self.color
+        end
     end
 end
