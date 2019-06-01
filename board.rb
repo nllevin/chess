@@ -5,6 +5,7 @@ require_relative "queen"
 require_relative "king"
 require_relative "pawn"
 require_relative "null_piece"
+require 'byebug'
 
 class Board
     attr_reader :rows
@@ -70,7 +71,7 @@ class Board
     end
 
     def checkmate?(color)
-        in_check?(color) && pieces.none? { |piece| piece.color == color && piece.valid_moves }
+        in_check?(color) && pieces.none? { |piece| piece.color == color && !piece.valid_moves.empty? }
     end
 
     def in_check?(color)
@@ -89,6 +90,34 @@ class Board
             piece_arr += row.reject { |tile| tile.empty? }
         end
         piece_arr
+    end
+
+    def dup
+        duped_board = Board.new
+        
+        @rows.each_with_index do |row, row_idx|
+            row.each_with_index do |tile, col_idx|
+                tile_pos = [row_idx, col_idx]        
+                piece_info = [tile.color, duped_board, tile_pos]
+                case tile.symbol
+                when :rook
+                    duped_board[tile_pos] = Rook.new(*piece_info)
+                when :knight
+                    duped_board[tile_pos] = Knight.new(*piece_info)
+                when :bishop
+                    duped_board[tile_pos] = Bishop.new(*piece_info)
+                when :queen
+                    duped_board[tile_pos] = Queen.new(*piece_info)
+                when :king
+                    duped_board[tile_pos] = King.new(*piece_info)
+                when :pawn
+                    duped_board[tile_pos] = Pawn.new(*piece_info)
+                when :null_piece
+                    duped_board[tile_pos] = NullPiece.instance
+                end
+            end
+        end
+        duped_board
     end
 end
 

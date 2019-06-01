@@ -2,7 +2,7 @@ require "colorize"
 
 class Piece
     attr_reader :color
-    attr_accessor :pos
+    attr_accessor :pos, :board
 
     def initialize(color, board, pos)
         @color, @board, @pos =
@@ -41,6 +41,10 @@ class Piece
         symbol == :null_piece
     end
 
+    def valid_moves
+        moves.reject { |move| move_into_check?(move) }
+    end
+
     def moves
         #overwritten by subclasses
     end
@@ -51,5 +55,12 @@ class Piece
 
     def inspect
         "Symbol => #{symbol}, color => #{@color}, position => #{@pos}"
+    end
+
+    private
+
+    def move_into_check?(end_pos)
+        duped_board = @board.dup
+        duped_board.move_piece(@pos, end_pos)
     end
 end
