@@ -69,6 +69,10 @@ class Board
         row.between?(0,7) && col.between?(0,7)
     end
 
+    def find_king(color)
+        pieces.find { |piece| piece.symbol == :king && piece.color == color }
+    end
+
     def pieces
         piece_arr = []
         @rows.each do |row|
