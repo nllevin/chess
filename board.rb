@@ -69,6 +69,16 @@ class Board
         row.between?(0,7) && col.between?(0,7)
     end
 
+    def checkmate?(color)
+        in_check?(color) && pieces.none? { |piece| piece.color == color && piece.valid_moves }
+    end
+
+    def in_check?(color)
+        king_pos = find_king(color).pos
+        enemy_pieces = pieces.select { |piece| piece.color != color }
+        enemy_pieces.any? { |enemy| enemy.moves.include?(king_pos) }
+    end
+
     def find_king(color)
         pieces.find { |piece| piece.symbol == :king && piece.color == color }
     end
