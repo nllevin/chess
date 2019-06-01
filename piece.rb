@@ -48,4 +48,8 @@ class Piece
     def symbol
         #overwritten by subclasses
     end
+
+    def inspect
+        "Symbol => #{symbol}, color => #{@color}, position => #{@pos}"
+    end
 end
