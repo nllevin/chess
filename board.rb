@@ -68,6 +68,14 @@ class Board
         row, col = pos
         row.between?(0,7) && col.between?(0,7)
     end
+
+    def pieces
+        piece_arr = []
+        @rows.each do |row|
+            piece_arr += row.reject { |tile| tile.empty? }
+        end
+        piece_arr
+    end
 end
 
 class NoPieceError < StandardError
