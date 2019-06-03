@@ -47,8 +47,10 @@ class Board
         piece = self[start_pos]
         if piece.empty?
             raise NoPieceError
-        elsif !piece.valid_moves.include?(end_pos)
+        elsif !piece.moves.include?(end_pos)
             raise InvalidMoveError
+        elsif !piece.valid_moves.include?(end_pos)
+            raise MoveIntoCheckError
         else
             piece.pos = end_pos
             self[start_pos], self[end_pos] = NullPiece.instance, piece
@@ -133,6 +135,12 @@ end
 
 class InvalidMoveError < StandardError
     def message
-        "That piece cannot move to that end position."
+        "That piece cannot move to that position."
+    end
+end
+
+class MoveIntoCheckError < StandardError
+    def message
+        "You cannot move into check."
     end
 end
