@@ -47,12 +47,16 @@ class Board
         piece = self[start_pos]
         if piece.empty?
             raise NoPieceError
-        elsif !piece.moves.include?(end_pos)
+        elsif !piece.valid_moves.include?(end_pos)
             raise InvalidMoveError
         else
             piece.pos = end_pos
             self[start_pos], self[end_pos] = NullPiece.instance, piece
         end
+    end
+
+    def move_piece!(start_pos, end_pos)
+        self[start_pos], self[end_pos] = NullPiece.instance, self[start_pos]
     end
 
     def [](pos)
