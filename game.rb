@@ -22,6 +22,8 @@ class Game
             swap_turn!
         end
         @display.render
+        winner = @players.keys.find { |player| !@board.checkmate?(player) }
+        puts "Checkmate! Congratulations, #{winner.to_s} player, you won!"
     end
 
     private
