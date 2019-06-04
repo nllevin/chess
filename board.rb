@@ -131,18 +131,18 @@ end
 
 class NoPieceError < StandardError
     def message
-        "There is no piece to move from that start position."
+        "Sorry, there is no piece to move from that position."
     end
 end
 
 class InvalidMoveError < StandardError
     def message
-        "That piece cannot move to that position."
+        "Sorry, that piece cannot move to that position."
     end
 end
 
 class MoveIntoCheckError < StandardError
     def message
-        "You cannot move into check."
+        "Sorry, you cannot move into check."
     end
 end
