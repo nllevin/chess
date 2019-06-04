@@ -16,7 +16,7 @@ class Game
 
     def play
         until @board.checkmate?(:white) || @board.checkmate?(:black)
-            @players[@current_player].make_move
+            @players[@current_player].make_move(@board)
             swap_turn!
         end
     end
