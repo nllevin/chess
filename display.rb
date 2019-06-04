@@ -19,12 +19,12 @@ class Display
                 piece_str = piece.to_s
                 if @cursor.cursor_pos == [row_idx, col_idx]
                     if @cursor.selected
-                        print piece_str.on_light_green
+                        print piece_str.on_red
                     else
                         print piece_str.on_light_blue
                     end
                 elsif (row_idx + col_idx).even?
-                    print piece_str.on_red
+                    print piece_str.on_white
                 else
                     print piece_str.on_light_black
                 end

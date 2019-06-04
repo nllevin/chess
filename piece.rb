@@ -10,31 +10,42 @@ class Piece
     end
 
     def to_s
-        case symbol
-        when :rook
-            str = "R"
-        when :knight
-            str = "H"
-        when :bishop
-            str = "B"
-        when :king
-            str = "K"
-        when :queen
-            str = "Q"
-        when :pawn
-            str = "P"
-        when :null_piece
+        case color
+        when :white
+            case symbol
+            when :rook
+                str = "\u2656"
+            when :knight
+                str = "\u2658"
+            when :bishop
+                str = "\u2657"
+            when :king
+                str = "\u2654"
+            when :queen
+                str = "\u2655"
+            when :pawn
+                str = "\u2659"
+            end
+        when :black
+            case symbol
+            when :rook
+                str = "\u265C"
+            when :knight
+                str = "\u265E"
+            when :bishop
+                str = "\u265D"
+            when :king
+                str = "\u265A"
+            when :queen
+                str = "\u265B"
+            when :pawn
+                str = "\u265F"
+            end
+        else 
             str = " "
         end
 
-        case color
-        when :white
-            str = str.white
-        when :black
-            str = str.black
-        end
-
-        str
+        str.black
     end
 
     def empty?

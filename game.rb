@@ -19,6 +19,7 @@ class Game
             @players[@current_player].make_move(@board)
             swap_turn!
         end
+        @display.render
     end
 
     private
