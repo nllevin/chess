@@ -1,7 +1,8 @@
 # chess
 
-To play a game of chess, enter into the terminal:
-\nruby game.rb
+To play a game of chess, enter into the terminal: 
+
+ruby game.rb
 
 Known issues/potential areas for improvement: 
 1) the board is oblong, not square, and too small
